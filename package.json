@@ -6,6 +6,10 @@
   "bugs": {
     "url": "https://github.com/ryonakae/nulljs/issues"
   },
+  "dependencies": {
+    "gsap": "^2.0.2",
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
