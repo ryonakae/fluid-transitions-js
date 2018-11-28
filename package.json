@@ -7,11 +7,9 @@
     "url": "https://github.com/ryonakae/nulljs/issues"
   },
   "dependencies": {
-    "gsap": "^2.0.2",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
     "babel-eslint": "^10.0.1",
@@ -27,7 +25,14 @@
     "lint-staged": "^8.1.0",
     "lite-server": "^2.4.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.15.2"
+    "prettier": "^1.15.2",
+    "rollup": "^0.67.3",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-istanbul": "^2.0.1",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-terser": "^3.0.0"
   },
   "homepage": "https://github.com/ryonakae/nulljs",
   "license": "MIT",
@@ -40,10 +45,10 @@
   "main": "lib/index.js",
   "repository": "git@github.com:ryonakae/nulljs.git",
   "scripts": {
-    "build": "NODE_ENV=production babel src/index.js -d lib -s inline",
+    "build": "NODE_ENV=production rollup -c",
     "dev": "run-p watch:*",
     "prepare": "npm run build",
     "watch:html": "lite-server -c bs-config.js & open http://localhost:3000/test/index.html",
-    "watch:js": "babel src -d lib -s inline -w"
+    "watch:js": "rollup -c -w"
   }
 }
