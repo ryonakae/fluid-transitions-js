@@ -1,32 +1,46 @@
+import clear from 'rollup-plugin-clear'
 import babel from 'rollup-plugin-babel'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
-import autoExternal from 'rollup-plugin-auto-external'
-import istanbul from 'rollup-plugin-istanbul'
+import serve from 'rollup-plugin-serve'
+import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 
 const IS_DEV = process.env.NODE_ENV !== 'production'
-let plugins = [babel()]
+
+let plugins = [
+  clear({
+    targets: ['lib']
+  }),
+  babel()
+]
+let external = []
 
 if (IS_DEV) {
-  plugins.concat([
+  plugins = plugins.concat([
     resolve({
       browser: true
     }),
     commonjs(),
-    istanbul({
-      exclude: ['node_modules/**/*.js']
-    })
+    serve({
+      open: true,
+      openPage: '/sandbox/index.html',
+      contentBase: './'
+    }),
+    livereload('./')
   ])
 } else {
-  plugins.concat([autoExternal(), terser()])
+  plugins = plugins.concat([terser()])
+  external = external.concat(['lodash'])
 }
 
 export default {
-  entry: 'src/index.js',
+  entry: 'src/fluid-transitions.js',
   output: {
-    file: 'lib/index.js',
-    format: 'cjs'
+    file: 'lib/fluid-transitions.js',
+    format: 'cjs',
+    sourcemap: IS_DEV
   },
-  plugins
+  plugins,
+  external
 }
