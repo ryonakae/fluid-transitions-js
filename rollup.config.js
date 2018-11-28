@@ -31,7 +31,7 @@ if (IS_DEV) {
   ])
 } else {
   plugins = plugins.concat([terser()])
-  external = external.concat(['lodash'])
+  external = external.concat(['lodash', 'victor'])
 }
 
 export default {
