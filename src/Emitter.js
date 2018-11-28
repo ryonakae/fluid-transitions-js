@@ -8,14 +8,16 @@ export default class Emitter {
   }
 
   setTargetElement(element) {
-    this.targetElement = document.querySelector(element)
+    document.querySelectorAll(element).forEach(_element => {
+      console.log(_element)
+    })
+    this.targetElement = document.querySelectorAll(element)[0]
     console.log(this.targetElement)
   }
 
   addEvents() {
     this.targetElement.addEventListener('touchstart', this.onTouchStart, false)
     this.targetElement.addEventListener('touchend', this.onTouchEnd, false)
-    console.log(this)
   }
 
   onTouchMove(event) {
